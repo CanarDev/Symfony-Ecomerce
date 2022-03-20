@@ -22,8 +22,3 @@
 ### .DS_Store ###
 .DS_Store
 
-### Picture folders ###
-!/public/uploads/product/.gitkeep
-!/public/uploads/category/.gitkeep
-!/public/uploads/user/.gitkeep
-/public/uploads

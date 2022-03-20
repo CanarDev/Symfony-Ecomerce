@@ -29,7 +29,6 @@ class AppFixtures extends Fixture
             'ROLE_USER',
             'ROLE_ADMIN'
         ]);
-        $user->setPicture('user.png');
         $manager->persist($user);
         $manager->flush();
 
@@ -42,7 +41,6 @@ class AppFixtures extends Fixture
             $user->setRoles([
                 'ROLE_USER',
             ]);
-            $user->setPicture('user.png');
             $manager->persist($user);
         }
         $manager->flush();
