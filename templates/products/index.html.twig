@@ -64,8 +64,12 @@
                                         <div class="badge text-white bg-"></div><a class="d-block" href="{{ path('app_product', {'id' : product.id}) }}"><img class="img-fluid w-100" src="uploads/product/{{ product.picture }}" alt="..."></a>
                                         <div class="product-overlay">
                                             <ul class="mb-0 list-inline">
-                                                <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="/cart">Add to cart</a></li>
-                                                <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="/product/{{ product.id }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                                                {% if product.stock > 0 %}
+                                                    <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ path('cart_add', {'id': product.id}) }}">Add to cart</a></li>
+                                                    <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="{{ path('app_product', {'id': product.id}) }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                                                {% else %}
+                                                    <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="{{ path('app_product', {'id': product.id}) }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                                                {% endif %}
                                             </ul>
                                         </div>
                                     </div>
