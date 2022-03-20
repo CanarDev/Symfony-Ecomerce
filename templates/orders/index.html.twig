@@ -3,5 +3,39 @@
 {% block title %}Hello OrdersController!{% endblock %}
 
 {% block body %}
+    <div class="table-responsive mb-4">
+        <table class="table text-nowrap">
+            <thead class="bg-light">
+            <tr>
+                <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Command</strong></th>
+                <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">User</strong></th>
+                <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Products</strong></th>
+                <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase">Total</strong></th>
+                <th class="border-0 p-3" scope="col"> <strong class="text-sm text-uppercase"></strong></th>
+            </tr>
+            </thead>
+            <tbody class="border-0 ">
 
+            {% for order in orders %}
+                <tr>
+                    <td class="p-3 align-middle border-light">
+                        <p class="mb-0 small">{{ order.orderNumber }}</p>
+                    </td>
+                    <td class="p-3 align-middle border-light">
+                        <p class="mb-0 small">{{ order.user }}</p>
+                    </td>
+                    <td class="p-3 align-middle border-light">
+                        {% for product in order.products %}
+                            <p class="mb-0 small"><a href="{{ path('app_product', {'id': product.id}) }}">• {{ product.name }}</a></p>
+                        {% endfor %}
+                    </td>
+                    <td class="p-3 align-middle border-light">
+                        <p class="mb-0 small">{{ order.price }} €</p>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

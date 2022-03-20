@@ -18,6 +18,7 @@ class OrdersController extends AbstractController
     {
         return $this->render('orders/index.html.twig', [
             'categories' => $categoriesRepository->findAll(),
+            'orders' => $ordersRepository->findBy(['user' => $user])
         ]);
     }
 }

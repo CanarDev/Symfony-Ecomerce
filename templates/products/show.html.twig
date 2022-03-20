@@ -81,10 +81,10 @@
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
                                         {% if products.stock > 0 %}
-                                            <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ path('cart_add', {'id': product.id}) }}">Add to cart</a></li>
-                                            <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="{{ path('app_product', {'id': product.id}) }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                                            <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ path('cart_add', {'id': products.id}) }}">Add to cart</a></li>
+                                            <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="{{ path('app_product', {'id': products.id}) }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
                                         {% else %}
-                                            <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="{{ path('app_product', {'id': product.id}) }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                                            <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="{{ path('app_product', {'id': products.id}) }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
                                         {% endif %}
                                     </ul>
                                 </div>
