@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-6">
+                    <!-- PRODUCT SLIDER-->
+                    <div class="row m-sm-0">
+                        <div class="col-sm-2 p-sm-0 order-2 order-sm-1 mt-2 mt-sm-0 px-xl-2">
+                            <div class="swiper product-slider-thumbs">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide h-auto swiper-thumb-item mb-3"><img class="w-100" src="/uploads/product/{{ product.picture }}" alt="..."></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-10 order-1 order-sm-2">
+                            <div class="swiper product-slider">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide h-auto"><a class="glightbox product-view" href="/uploads/product/{{ product.picture }}" target="_blank" data-gallery="gallery2" data-glightbox="Product item 1"><img class="img-fluid" src="/uploads/product/{{ product.picture }}" alt="..."></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PRODUCT DETAILS-->
+                <div class="col-lg-6">
+                    <ul class="list-inline mb-2 text-sm">
+                        <p class="text-muted lead">
+                            {% if product.stock < 10 %}
+                                <p class="text-muted lead"><span style="color: red; font-weight: bold">ONLY </span>{{ product.stock }} Left</p>
+                            {% else %}
+                                <p class="text-muted lead">{{ product.stock }} product left</p>
+                        {% endif %}
+                        </p>
+                    </ul>
+                    <h1>{{ product.name }} Picture</h1>
+                    <p class="text-muted lead">{{ product.price }} €</p>
+                    <p class="text-sm mb-4">{{ product.description }}</p>
+                    <div class="row align-items-stretch mb-4">
+                        <div class="col-sm-5 pr-sm-0">
+                            <div class="border d-flex align-items-center justify-content-between py-1 px-3 bg-white border-white"><span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
+                                <div class="quantity">
+                                    <input class="form-control border-0 shadow-0 p-0" type="number" value="1" min="1" max="{{ product.stock }}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 pl-sm-0 mb-4"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="{{ path('app_cart') }}">Add to cart</a></div>
+                        <ul class="list-unstyled small d-inline-block">
+                            <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Category:</strong><a class="reset-anchor ms-2" href="/category/{{ product.category.id }}">{{ product.category.name }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- DETAILS TABS-->
+                <ul class="nav nav-tabs border-0 mt-4" id="myTab" role="tablist">
+                    <li class="nav-item"><a class="nav-link text-uppercase active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Description</a></li>
+                </ul>
+                <div class="tab-content mb-5" id="myTabContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <div class="p-4 p-lg-5 bg-white">
+                            <h6 class="text-uppercase">Product description </h6>
+                            <p class="text-muted text-sm mb-0">{{ product.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- RELATED PRODUCTS-->
+                <h2 class="h5 text-uppercase mb-4">Related products</h2>
+                <div class="row">
+                    <!-- PRODUCT-->
+                    {% for products in productLinked %}
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="product text-center skel-loader">
+                            <div class="d-block mb-3 position-relative"><a class="d-block" href="{{ path('app_product', {'id': products.id}) }}"><img class="img-fluid w-100" src="/uploads/product/{{ products.picture }}" alt="..."></a>
+                                <div class="product-overlay">
+                                    <ul class="mb-0 list-inline">
+                                        <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ path('app_cart') }}">Add to cart</a></li>
+                                        <li class="list-inline-item mr-0"><a class="btn btn-sm btn-outline-dark" href="{{ path('app_product', {'id': products.id}) }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <h6> <a class="reset-anchor" href="{{ path('app_product', {'id': products.id}) }}">{{ products.name }}</a></h6>
+                            <p class="small text-muted">{{ products.price }} €</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <script>
+                $drop = document.querySelector(".dropdown-toggle");
+                $open = document.querySelector(".dropdown-menu");
+                $drop.addEventListener('click', function() {
+                    $open.classList.toggle('show')
+                })
+            </script>
+        </div>
+    </section>
+{% endblock %}

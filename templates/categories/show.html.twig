@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+    <style>
+        .bg-greyLikeHome {
+            background-color: #F4F5F8;
+        }
+    </style>
+<!-- HERO SECTION-->
+    <div class="container">
+        <section class="hero pb-3 bg-cover bg-greyLikeHome bg-center d-flex justify-content-center align-items-center">
+            <div class="container py-5">
+                <div class="row px-4 px-lg-5">
+                    <div class="col-lg-6">
+                        <p class="text-muted small text-uppercase mb-2">All {{ category.name }} Covers</p>
+                        <h1 class="h2 text-uppercase mb-3">Official designs</h1><a class="btn btn-dark" href="{{ path('app_categories') }}">See other categories</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 m-4"><a class="category-item"><img class="img-fluid" src="/uploads/category/{{ category.picture }}" alt=""/><strong class="category-item-title mt-5">{{ category.name }}</strong></a>
+            </div>
+        </section>
+        <!-- TRENDING PRODUCTS-->
+        <section class="py-5">
+            <header>
+                <p class="small text-muted small text-uppercase mb-1">All products about</p>
+                <h2 class="h5 text-uppercase mb-4">{{ category.name }}</h2>
+            </header>
+            <div class="row justify-content-center">
+                <!-- PRODUCT-->
+                {% for product in category.products %}
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <div class="product text-center">
+                        <div class="position-relative mb-3">
+                            <div class="badge text-white bg-"></div><a class="d-block" href="{{ path('app_product', {'id': product.id}) }}"><img class="img-fluid w-100" src="/uploads/product/{{ product.picture }}" alt="..."></a>
+                            <div class="product-overlay">
+                                <ul class="mb-0 list-inline">
+                                    <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-dark" href="{{ path('app_cart') }}">Add to cart</a></li>
+                                    <li class="list-inline-item me-0"><a class="btn btn-sm btn-outline-dark" href="{{ path('app_product', {'id': product.id}) }}" data-bs-toggle="modal"><i class="fas fa-expand"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h6> <a class="reset-anchor" href="{{ path('app_product', {'id': product.id}) }}">{{ product.name }}</a></h6>
+                        <p class="small text-muted">{{ product.price }} € | Already {{ product.stock }} product left</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+    <script>
+        $drop = document.querySelector(".dropdown-toggle");
+        $open = document.querySelector(".dropdown-menu");
+        $drop.addEventListener('click', function() {
+            $open.classList.toggle('show')
+        })
+    </script>
+{% endblock %}
